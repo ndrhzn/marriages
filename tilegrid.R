@@ -19,14 +19,14 @@ ukraine <- data.frame(
 
 ukraine <- ukraine %>% 
   inner_join(df, by = c('name' = 'region')) %>% 
-  select(-code, -meanf, -meanm) %>% 
+  select(-code, -medianf, -medianm) %>% 
   tidyr::gather(sex, age, -name, -row, -col) %>% 
-  mutate(sex = forcats::fct_recode(sex, чоловіки = 'medianm', жінки = 'medianf'))
+  mutate(sex = forcats::fct_recode(sex, чоловіки = 'meanm', жінки = 'meanf'))
 
-png('tilegrid_median.png', width = 1000, height = 1000)
+png('tilegrid_mean.png', width = 1000, height = 1000)
 
 ggplot(ukraine)+
-  geom_tile(aes(x = col, y = row, fill = age), color = '#5D646F', size = 0.1)+
+  geom_tile(aes(x = col, y = row, fill = age), color = '#5D646F', size = 0.05, alpha = 0.8)+
   geom_text(aes(x = col, y = row, 
                 label = paste(name, age, sep = '\n'), family = 'Ubuntu Condensed'), 
             color = '#3A3F4A', size = 4.5)+
@@ -36,7 +36,7 @@ ggplot(ukraine)+
   guides(fill = guide_colorbar(nbin = 10, raster = F, ticks = T,
                                 title = 'вік, років',
                                 title.position = 'top'))+
-  labs(title = 'Медіанний вік першого шлюбу',
+  labs(title = 'Середній вік першого шлюбу',
        subtitle = 'В розрізі регіонів та статей',
        caption = 'Дані: Державна служба статистики, 2015 рік | Візуалізація: Textura.in.ua')+
   theme_void()+
