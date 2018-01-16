@@ -33,17 +33,12 @@ ggplot(ukraine)+
   scale_y_reverse()+
   scale_fill_distiller(palette = 4, direction = 1)+
   facet_wrap(~sex, ncol = 1)+
-  guides(fill = guide_colorbar(nbin = 10, raster = F, ticks = T,
-                                title = 'вік, років',
-                                title.position = 'top'))+
   labs(title = 'Середній вік першого шлюбу',
        subtitle = 'В розрізі регіонів та статей',
        caption = 'Дані: Державна служба статистики, 2015 рік | Візуалізація: Textura.in.ua')+
   theme_void()+
   theme(text = element_text(family = 'Ubuntu Condensed', face = 'plain', color = '#3A3F4A'),
         legend.position = 'none',
-        legend.key.height = unit(7.5, "pt"),
-        legend.key.width = unit(175, "pt"),
         panel.grid.minor = element_blank(),
         strip.text = element_text(size = 18, face = 'bold'),
         plot.title = element_text(face = 'bold', size = 44, margin = margin(b = 20, t = 10)),
